@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htnml Events </title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+<script>
+    // event can also be applied in html but it is not scalable(except ReactJs)
+    // document.getElementById('owl').onclick=function(e){
+    //     alert("Owl clicked ")
+    // }
+    // it is also not followed we should use eventListeners because they give propogation method(more features)
+
+    const owl=document.getElementById("owl")
+    // three parameter is to be given in eventListerner->type,function,false
+    owl.addEventListener('click',function(e){
+        alert("owl clicked");
+        console.log(e)// where e(event) is object, mostly we get browser event like position, timeStamp 
+    },false) // third paramenter is default false 
+
+    //other approach is attachEvent on internet explorer 
+    // also jQuery- on
+    // so 4 methods 
+
+    // type,timeStamp,defaultPrevented,target , toElement, srcElement, currentTarget, clientX,clientY,offset,screenX,etc...
+    //altkey,ctrlkey,shiftkey,keyCode(codes of A,B,....)
+
+    //false is for event propagation
+
+    document.getElementById('images').addEventListener('click',function(e){console.log("clicked ul")},false)
+    document.getElementById('owl').addEventListener('click',function(e){console.log("clicked owl")
+        // e.stopPropagation() // prevent the propagation of the event i.e. bubble will not go upside -> only owl clicked not ul
+    },false)
+    // as owl comes in images ->first clicked owl then clicked ul
+    // false is bubbling phase (niche se upper ) i.e.  inside to outside 
+    //true is capturing phase (top to bottom) first clicked ul then clicked owl
+
+    document.getElementById('google').addEventListener('click',function(e){
+        e.preventDefault()
+        
+    })
+
+    const ul=document.querySelector("#images").addEventListener('click',function(e){
+        console.log(e.target.parentNode);
+        if(e.target.tagName=='IMG'){
+        let removeIt=e.target.parentNode;
+        removeIt.remove() // or removeIt.parentNode.removeChild(removeIt)
+    }},false)
+
+    // if we clicked near google i.e. on 
+
+</script>
+</html>
