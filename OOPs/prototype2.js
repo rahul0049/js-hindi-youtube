@@ -46,7 +46,7 @@ Teacher.__proto__=user // now teacher can access properties of User
 // modern syntax
 Object.setPrototypeOf(Teacher,user) // allowing teacher to access the properties of user
 
-//solution
+//solution //
 let anotherUserName="chai aur code            "
 String.prototype.truelength=function(){
     console.log(`${this}`)
